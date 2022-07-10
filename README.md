@@ -1,77 +1,98 @@
 
 # Netflix Movies & TV Shows Clustering
 
-In any supply chain, an ability to accurately predict sales has a direct impact on its operating expenditure. Being able to accurately predict the sales validates understanding of the factors influencing it. A good understanding of these underling factors enable in taking “decisions” that can improve sales. 
-Rossmann operates over 3,000 drug stores in 7 European countries. Currently, Rossmann store managers are tasked with predicting their daily sales for up to six weeks in advance. Store sales are influenced by many factors, including promotions, competition, school and state holidays, seasonality, and locality. With thousands of individual managers predicting sales based on their unique circumstances, the accuracy of results can be quite varied
+With the advent of streaming platforms, there’s no doubt that Netflix has become one of the important platforms for streaming. The dataset that we have used for EDA and clustering has been collected by Flixable, a third-party Netflix search engine. There are 12 features and around 7700 observations in the dataset and are mostly textual features.
 
-### Keywords: 
-Sales Prediction, NumPy, scikit-learn, machine-learning, RMSE, Linear regression, lasso regression ,decision tree
+Through univariate and multivariate analysis, we found trends that will help in understanding     what content is being consumed country-wise, depending on some categorical features like rating, type, genres, cast, directors, etc. Clustering was performed along with NLP on textual columns and then a mini-recommendation system was built out of it.
+
+Keywords—Machine Learning, Explanatory Data Analysis, Netflix, TV Shows, Movies, Genre, Clustering, K Means.
+
 ## Introduction
-In the following project, we have applied machine learning to a real world problem of predicting retail stores sales. Such predictions help store managers in creating effective staff schedules that increase productivity. We used the popular open source programming language Python and used its libraries like NumPy, scikit-learn, pandas , matplotlib for modelling, analysis and prediction and visualization. We used feature selection, model selection to improve our prediction result. In view of the nature of our problem, Root Mean Square Error (RMSE) is used to measure the prediction accuracy. 
+Unsupervised Learning is a machine learning technique in which the models are not supervised by the training set instead we find hidden patterns and insights from the given data. It is a machine learning technique in which models are trained on the unlabeled data set without any supervision. 
+
+A cluster is a collection of elements that are similar to each other but dissimilar to the elements belonging to other clusters. Clustering can be done using various kinds of distances such as Euclidean distance, Manhattan distance, gomer distance, etc. We can do different kinds of clustering based on the data pattern in space such as spherical clustering, K-means clustering, etc.
 
 
 ## Problem Statement
 
+This dataset consists of tv shows and movies available on Netflix as of 2019. The dataset is collected from Flixable which is a third-party Netflix search engine.
+In 2018, they released an interesting report which shows that the number of TV shows on Netflix has nearly tripled since 2010. The streaming service’s number of movies has decreased by more than 2,000 titles since 2010, while its number of TV shows has nearly tripled. It will be interesting to explore what all other insights can be obtained from the same dataset.
+
+In this project, you are required to do –
+
+1. Exploratory Data Analysis.
+2. Understanding what type content is available in different countries.
+3. Is Netflix increasingly focused on TV rather than movies in recent
+years?
+4. Clustering similar content by matching text-based features
+
+Our goal here is to make an unsupervised clustering model, which will help in garnering insights on Netflix and how its content is being consumed.
 
 ## Dataset
-[Dataset from Rossmann stores.](https://drive.google.com/file/d/1nCuTVec4BuoF-QgUnWER2RtG0cX_8lLN/view?usp=sharing)
+[Dataset from Flixable - A third-party Netflix search engine.](https://drive.google.com/file/d/12U7pvtOG9mVLNMGuc6hFyydI4Ya3_iJc/view?usp=sharing)
 
+A brief summary of the dataset is given below:
 
+Show id: Unique ID for every Movie / TV Show 
+type – Identifier - A Movie or TV Show 
+title – Title of the Movie / TV Show 
+director-director of the content 
+cast –Actors involved in the movie / show 
+country – Country where the movie / show was produced 
+date_added – Date it was added on Netflix 
+release_year – Actual Release year of the movie / show 
+rating – TV Rating of the movie / show 
+duration – Total Duration - in minutes or number of seasons 
+listed_in – genre 
+description – The Summary description
 
 ## Algorithm Used
-We were successful in building aMachine Learning models that will forecast future sales. Various methods of sales forecasting model that we will use in our project includes:
+1.	K-means Clustering
+k-means clustering is a method of vector quantization, originally from signal processing, that aims to partition n observations into k clusters in which each observation belongs to the cluster with the nearest mean (cluster centers or cluster centroid), serving as a prototype of the cluster.
 
-1.	Linear Regression (OLS) 
+We created the sample data using build blobs and used range_n_clusters to specify the number of clusters we wanted to utilize in k means.
 
-Ordinary Least Squares  is a method which helps us estimate the unknown parameters in the Linear regression model. How does it estimate the parameters though? Well, it estimates the parameters by minimizing the sum of squared residuals. The way it does this is , it draws a line through the data points such that the squared differences between the observed values and the corresponding  fitted value is minimized.
+2.	Heirarchial clustring
+The number of clusters will be the number of vertical lines which are being intersected by the line drawn using the threshold .
+So we consider, no. of Cluster = 3
 
-Linear regression attempts to model the relationship between two variables by fitting a linear equation to observed data. ... A linear regression line has an equation of the form Y = a + bX, where X is the explanatory variable and Y is the dependent variable.
+3.	Agglomerative Clustering
 
-2.	 Lasso Regression
-Basically, Lasso makes leaps in the most optimally calculated direction without overfitting the model. 
-Normalize all values to have zero mean and unit variance.
-Find a variable that is most highly correlated to the residual. Move the regression line in this direction until we reach another variable that has the same or higher correlation.
-When we have two variables that have the same correlation, move the regression line at an angle that is in between (i.e., least angle between the two variables).
-Continue this until all of our data is exhausted or until you think the model is big and ‘general’ enough.
-
-Continue and repeat until all predictors are in the model.
-
-3.	 Decision Tree Regression
-
-Decision trees build regression or classification models in the form of a tree structure. It breaks down a dataset into smaller and smaller subsets while at the same time an associated decision tree is incrementally developed. The final result is a tree with decision nodes and leaf nodes. A decision node (e.g., Outlook) has two or more branches (e.g., Sunny, Overcast and Rainy), each representing values for the attribute tested. Leaf node (e.g., Hours Played) represents a decision on the numerical target. The topmost decision node in a tree which corresponds to the best predictor called root node. Decision trees can handle both categorical and numerical data. 
-
-Model Comparison & Selection
-There are two popular metrics used in measuring the performance of regression (continuous variable) models i.e MAE & RMSE. 
-
-●	Mean Absolute Error (MAE): It is the average of the absolute difference between the predicted values and observed values.
-
-●	Root Mean Square Error (RMSE): It is the square root of the average of squared differences between the predicted values and observed values.
-
-MAE is easier to understand and interpret but RMSE works well in situations where large errors are undesirable. This is because the errors are squared before they are averaged, thus penalizing large errors.
-So, we choose RMSE as a metric to measure the performance of our models.
+The agglomerative clustering is the most common type of hierarchical clustering
+used to group objects in clusters based on their similarity. Next, pairs of
+clusters are successively merged until all clusters have been merged into one big cluster containing all objects.
 
 ## Conclusion
-●	Rossmann should focus on increasing the promotional offers per quarter for 1,2,3 and can minimize for 2.
+Following conclusion were drawn -
 
-●	The most selling and crowded store type is 2
+•	 We started by removing NaN values and converting the Netflix added date to year, month, and day using date time format.
 
-●	Sales is highly correlated to the number of Customers.
+•	Most films were released in the years 2018, 2019, and 2020.
 
-●	For all stores, Promotion leads to increase in Sales and Customers both.
+•	The months of October, November, December and January had the largest number of films and television series released.
 
-●	The stores which are opened during the School Holiday have more sales than normal days.
+•	TV shows account for 2.8 percent of the total, while movies account for 97.2 percent.
 
-●	More stores are opened during School holidays than State holidays.
+•	The United States, India, the United Kingdom, Canada, and Egypt are the top five producer countries.
 
-●	Rossman should try to focus on reducing the Promo offers for store type b during StateHolidays as there is no substantial increase in Sales.
+•	Netflix has added a lot more movies and TV episodes in the previous years, but the numbers are still low when compared to movies released in the last ten years.
 
-●	that people buy more beauty products during a Christmas celebration.
+•	We did feature engineering, which involved removing certain variables and preparing a dataframe to feed the clustering algorithms.
 
-●	Rossmann can divert some of the Promos from being offered on SchoolHolidays to No SchoolHolidays to maximise the Sales revenue. 
+•	For the clustering algorithm, we utilized type, director, nation, released year, genre, and year.
 
-●	Absence of values in features CompetitionOpenSinceYear/Month doesn’t indicate the absence of competition as CompetitionDistance values are not null where the other two values are null.
+•	Affinity Propagation, Agglomerative Clustering, and K-means Clustering were utilised to build the model.
 
-●	After analysing sales using Fourier decomposition, we found that there’s a little seasonality component in the Sales data.
+•	In Affinity Propagation, we had 9 clusters and a Silhouette Coefficient score of 0.340.
+
+•	A dendrogram was used to determine the number of clusters in Agglomerative Clustering. There were two clusters, with an average silhouette score of 0.56590662228136.
+
+•	The final model we used was k-means clustering, which consisted of 2,3,4,5,6 clusters. 3 numbers of clusters gives us good fitting.
+
+•	After clustering, we can say that the number of TV shows launched in the previous years is NOT growing.
+
+•	The number of TV shows added to Netflix is higher in the last three years.
+
 
 ## Reference
 1.  Applied Science Article  MDPI
@@ -82,9 +103,9 @@ So, we choose RMSE as a metric to measure the performance of our models.
 ## 🚀 About Me
 
 
-- 👋 Hi, I am G Manikanta, a curious Data Scientist
+- 👋 Hi, I’m G Manikanta, a curious Data Scientist
 - 👀 I’m currently working on Machine Learning projects.
-- 🌱 I’m currently learning various machine learning models 
+- 🌱 I’m currently learning various machine learning models .
 - 💞️ I’m would love to collaborate on Machine Learning projects.
-- 📫 How to reach me : kantamani13532@gmail.com
-- 👀 LinkedIn : https://www.linkedin.com/in/mkdatascientist
+- 📫 How to reach me : manipavangmanipavang637@gmailcom
+- 👀 LinkedIn : https://www.linkedin.com/in/mkscientist
